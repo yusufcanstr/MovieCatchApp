@@ -1,6 +1,6 @@
 package com.yusufcansenturk.moviecatchapp.di.module
 
-import android.content.Context
+import android.app.Application
 import com.yusufcansenturk.moviecatchapp.di.dao.GenreDao
 import com.yusufcansenturk.moviecatchapp.di.dao.GenreDatabase
 import com.yusufcansenturk.moviecatchapp.di.retrofit.RetrofitServiceInstance
@@ -14,31 +14,32 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+object AppModule {
 
-    val BASE_URL = "https://api.themoviedb.org/"
+    const val BASE_URL = "https://api.themoviedb.org/"
 
     @Provides
     @Singleton
-    fun getAppDB(context: Context) : GenreDatabase {
-        return GenreDatabase.getApplicationDB(context)
+    fun getAppDB(context: Application): GenreDatabase {
+        return GenreDatabase.getAppDB(context)
     }
 
+
     @Provides
     @Singleton
-    fun getDao(appDB: GenreDatabase) : GenreDao {
+    fun getDao(appDB: GenreDatabase): GenreDao {
         return appDB.getDAO()
     }
 
     @Provides
     @Singleton
-    fun getRetrofitServiceInstance(retrofit: Retrofit): RetrofitServiceInstance {
+    fun getRetrofitServiceInstance(retrofit: Retrofit) : RetrofitServiceInstance {
         return retrofit.create(RetrofitServiceInstance::class.java)
     }
 
-    @Singleton
     @Provides
-    fun getRetroInstance(): Retrofit {
+    @Singleton
+    fun getRetroInstance(): Retrofit{
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

@@ -16,7 +16,6 @@ class HomePageViewModel @Inject constructor(
     var recentMovieList : MutableLiveData<Movie>
     var genreList : MutableLiveData<Genre>
 
-
     init {
         popularMovieList = MutableLiveData()
         recentMovieList = MutableLiveData()
@@ -26,7 +25,6 @@ class HomePageViewModel @Inject constructor(
     fun getObserveGenre (): MutableLiveData<Genre>{
         return genreList
     }
-
 
     fun getObserveLiveData(isPopular: Boolean): MutableLiveData<Movie>{
         if (isPopular)
@@ -38,8 +36,6 @@ class HomePageViewModel @Inject constructor(
     fun loadGenreData() {
         repository.getAllGenres(genreList)
     }
-
-
 
     fun loadData(page:String, isPopular: Boolean){
         if (isPopular)

@@ -10,14 +10,17 @@ abstract class GenreDatabase : RoomDatabase(){
 
     abstract fun getDAO() : GenreDao
 
-    companion object
-    {
+    companion object {
+
         private var dbINSTANCE: GenreDatabase? = null
 
-        fun getApplicationDB(context: Context): GenreDatabase {
-            if (dbINSTANCE == null) {
-                dbINSTANCE = Room.databaseBuilder<GenreDatabase>(context.applicationContext,
-                    GenreDatabase::class.java, "genre_database").allowMainThreadQueries().build()
+        fun getAppDB(context: Context): GenreDatabase {
+            if (dbINSTANCE == null){
+                dbINSTANCE = Room.databaseBuilder<GenreDatabase>(
+                    context.applicationContext,
+                    GenreDatabase::class.java,
+                    "genre_database"
+                ).allowMainThreadQueries().build()
             }
             return dbINSTANCE!!
         }

@@ -12,11 +12,11 @@
         android:id="@+id/nav_favorites"
         android:title="Favorites"
         android:icon="@drawable/ic_hearth"
-        android:iconTint="#F44336"/>
+        android:iconTint="#E91E63"/>
 
     <item
         android:id="@+id/nav_settings"
         android:title="Settings"
         android:icon="@drawable/ic_settings"
-        android:iconTint="#4CAF50"/>
+        android:iconTint="#FFC107"/>
 </menu>
