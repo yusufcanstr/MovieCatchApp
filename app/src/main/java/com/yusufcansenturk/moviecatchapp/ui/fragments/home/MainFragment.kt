@@ -8,18 +8,17 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentMainBinding
+import com.yusufcansenturk.moviecatchapp.prefs.MovieSesionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
+    @Inject
+    lateinit var movieSesionManager: MovieSesionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +26,10 @@ class MainFragment : Fragment() {
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        if (movieSesionManager.getIsFirstRun()) {
+            movieSesionManager.setIsFirstRun(false)
+        }
 
         setupTabBar()
 

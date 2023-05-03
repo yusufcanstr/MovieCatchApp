@@ -32,7 +32,7 @@
             android:gravity="center">
 
             <ImageView
-                android:src="@color/teal_200"
+                android:src="@drawable/baseline_search_24"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
 
@@ -58,20 +58,20 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
                 android:text="See All"/>
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/baseline_navigate_next_24"/>
 
         </LinearLayout>
 
@@ -106,20 +106,20 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
                 android:text="See All"/>
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/baseline_navigate_next_24"/>
 
         </LinearLayout>
 

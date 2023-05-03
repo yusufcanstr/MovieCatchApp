@@ -12,6 +12,8 @@ import com.yusufcansenturk.moviecatchapp.adapter.MovieAdapter
 import com.yusufcansenturk.moviecatchapp.adapter.RecentMovieAdapter
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentHomeBinding
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentMainBinding
+import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
+import com.yusufcansenturk.moviecatchapp.viewmodel.GenreViewModel
 import com.yusufcansenturk.moviecatchapp.viewmodel.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -23,9 +25,12 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var genreList: List<GenreData>? = null
+
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var recentMovieAdapter: RecentMovieAdapter
     private lateinit var viewModel: HomePageViewModel
+    private lateinit var genreViewModel: GenreViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,22 +52,28 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[HomePageViewModel::class.java]
+        genreViewModel = ViewModelProvider(this)[GenreViewModel::class.java]
 
         initRecyclerViews()
 
         viewModel.getObserveLiveData(true).observe(viewLifecycleOwner) { movieList ->
             movieList?.let {
-                movieAdapter.setList(it.results)
+                movieAdapter.setLists(it.results, genreList!!)
             }
         }
 
         viewModel.getObserveLiveData(false).observe(viewLifecycleOwner) { recentMovieList ->
             recentMovieList?.let {
-                recentMovieAdapter.setList(it.results)
+                recentMovieAdapter.setLists(it.results, genreList!!)
             }
         }
 
-        fetchMovies()
+        genreViewModel.getRecordsObserver().observe(viewLifecycleOwner) {
+            it?.let {
+                genreList = it
+                fetchMovies()
+            }
+        }
 
     }
 

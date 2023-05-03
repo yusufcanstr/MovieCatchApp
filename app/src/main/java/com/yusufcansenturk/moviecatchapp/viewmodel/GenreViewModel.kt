@@ -36,7 +36,7 @@ class GenreViewModel @Inject constructor(
 
     fun loadRecords() {
         val list = genreRepository.readAllData
-        allData.postValue(list.value)
+        allData.postValue(list)
     }
 
 

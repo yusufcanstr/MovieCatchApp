@@ -10,13 +10,18 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentSplashBinding
+import com.yusufcansenturk.moviecatchapp.prefs.MovieSesionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var movieSesionManager: MovieSesionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +37,11 @@ class SplashFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                findNavController().navigate(R.id.action_splashFragment_to_appIntroFragment)
+                if (movieSesionManager.getIsFirstRun()) {
+                    findNavController().navigate(R.id.action_splashFragment_to_appIntroFragment)
+                }else {
+                    findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+                }
             },
             3000)
 

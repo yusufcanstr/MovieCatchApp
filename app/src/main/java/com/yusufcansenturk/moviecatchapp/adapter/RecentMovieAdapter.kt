@@ -8,19 +8,24 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.R
+import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
 import com.yusufcansenturk.moviecatchapp.model.Result
+import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
+import java.util.*
 
 
 class RecentMovieAdapter(private val isFirstScreen : Boolean = true): RecyclerView.Adapter<RecentMovieAdapter.MyCustomHolder>() {
 
     var liveData: List<Result>? = null
+    var genreList: List<GenreData>? = null
 
     //Image
     // https://image.tmdb.org/t/p/w500/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg
 
 
-    fun setList(liveData: List<Result>) {
+    fun setLists(liveData: List<Result>, genreList: List<GenreData>) {
         this.liveData = liveData
+        this.genreList = genreList
         notifyDataSetChanged()
     }
 
@@ -32,12 +37,29 @@ class RecentMovieAdapter(private val isFirstScreen : Boolean = true): RecyclerVi
         val txtReleaseDate = view.findViewById<TextView>(R.id.txtReleaseDate)
         val txtVoteAverage = view.findViewById<TextView>(R.id.txtVoteAverage)
 
-        fun bind(data: Result) {
+        fun bind(data: Result, genreList: List<GenreData>) {
             txtTitle.text = data.title
-            txtGenre.text = "Deneme deneme"
+            txtGenre.text = "genreList."
+
+            val lang = Locale.getDefault().language
+            var genres = ""
+            for(id in data.genre_ids) {
+                val result = genreList.find { x -> x.genre_id == id }
+                result?.let {
+                    if (lang == "tr") {
+                        genres += result!!.tr_name + ", "
+                    }else {
+                        genres += result!!.en_name + ", "
+                    }
+                }
+            }
+
+            genres = genres.substring(0, genres.length -2)
+            txtGenre.text = genres
+
             txtReleaseDate.text = data.release_date
             txtVoteAverage.text = data.vote_average.toString() + " / 10"
-            Glide.with(posterView).load("https://image.tmdb.org/t/p/w500"+data.poster_path).into(posterView)
+            Glide.with(posterView).load(BASE_IMAGE_URL+data.poster_path).into(posterView)
         }
 
     }
@@ -58,6 +80,6 @@ class RecentMovieAdapter(private val isFirstScreen : Boolean = true): RecyclerVi
     }
 
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
-        holder.bind(liveData!![position])
+        holder.bind(liveData!![position], genreList!!)
     }
 }

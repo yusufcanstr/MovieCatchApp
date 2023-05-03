@@ -58,11 +58,11 @@
 
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="4dp"
-                android:src="@drawable/ic_launcher_background"/>
+                android:src="@drawable/baseline_stars_24"/>
 
             <TextView
                 android:id="@+id/txtVoteAverage"
