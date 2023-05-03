@@ -30,7 +30,6 @@ class MainFragment : Fragment() {
 
         setupTabBar()
 
-
         return view
     }
 

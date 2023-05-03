@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.yusufcansenturk.moviecatchapp.adapter.ViewPagerAdapter
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentAppIntroBinding
+import com.yusufcansenturk.moviecatchapp.ui.fragments.appintro.pages.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,15 +29,20 @@ class AppIntroFragment : Fragment() {
         _binding = FragmentAppIntroBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val fragmentList = arrayListOf<Fragment>(
+            FirstScreen(),
+            SecondScreen(),
+            ThirdScreen(),
+            FourthScreen(),
+            FifthScreen()
+        )
 
+        val adapter = ViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager, lifecycle)
+
+        binding.viewPager.adapter = adapter
 
 
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onDestroyView() {
