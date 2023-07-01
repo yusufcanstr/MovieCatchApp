@@ -5,11 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.R
+import com.yusufcansenturk.moviecatchapp.databinding.PopularMovieItemBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
 import com.yusufcansenturk.moviecatchapp.model.Result
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.HomeFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 import java.util.*
 
@@ -28,15 +31,10 @@ class MovieAdapter(private val isFirstScreen : Boolean = true): RecyclerView.Ada
         notifyDataSetChanged()
     }
 
-    class MyCustomHolder(val view: View) : RecyclerView.ViewHolder(view){
-
-        val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
-        val txtGenre = view.findViewById<TextView>(R.id.txtGenre)
-        val posterView = view.findViewById<ImageView>(R.id.posterView)
-
+    class MyCustomHolder(val binding: PopularMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(data:Result, genreList: List<GenreData>) {
-            txtTitle.text = data.title
-            txtGenre.text = "genreList."
+            binding.txtTitle.text = data.title
+            binding.txtGenre.text = "genreList."
 
             val lang = Locale.getDefault().language
             var genres = ""
@@ -52,29 +50,34 @@ class MovieAdapter(private val isFirstScreen : Boolean = true): RecyclerView.Ada
             }
 
             genres = genres.substring(0, genres.length -2)
-            txtGenre.text = genres
-            Glide.with(posterView).load(BASE_IMAGE_URL+data.poster_path).into(posterView)
-
+            binding.txtGenre.text = genres
+            Glide.with(binding.posterView).load(BASE_IMAGE_URL+data.poster_path).into(binding.posterView)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCustomHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.popular_movie_item, parent,false)
+        val view = PopularMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent,false)
         return MyCustomHolder(view)
     }
 
     override fun getItemCount(): Int {
-        if (liveData==null) {
-            return 0
+        return if (liveData==null) {
+            0
         }else if (isFirstScreen) {
-            return 10
+            10
         }else {
-            return liveData!!.size
+            liveData!!.size
         }
     }
 
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
         holder.bind(liveData!![position], genreList!!)
+        holder.binding.apply {
+            posterView.setOnClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToFilmDetailsFragment(liveData!![position].id)
+                Navigation.findNavController(it).navigate(action)
+            }
+        }
     }
 }

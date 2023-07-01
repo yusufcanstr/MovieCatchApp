@@ -2,7 +2,9 @@ package com.yusufcansenturk.moviecatchapp.di.retrofit
 
 import com.yusufcansenturk.moviecatchapp.model.Genre
 import com.yusufcansenturk.moviecatchapp.model.Movie
+import com.yusufcansenturk.moviecatchapp.model.MovieDetail
 import com.yusufcansenturk.moviecatchapp.model.Trailer
+import com.yusufcansenturk.moviecatchapp.util.UiState
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,5 +26,8 @@ interface RetrofitServiceInstance {
 
     @GET("3/genre/movie/list?api_key=4f9a882954141dfe0f929b1d33cc6686&language=en-US")
     fun getSuggestions(@Query("query") query: String): Call<Movie>
+
+    @GET("3/movie/{movie_id}?api_key=4f9a882954141dfe0f929b1d33cc6686")
+    fun getMovieDetails(@Path("movie_id") id: Int): Call<MovieDetail>
 
 }
