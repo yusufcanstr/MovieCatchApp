@@ -1,15 +1,14 @@
 package com.yusufcansenturk.moviecatchapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.yusufcansenturk.moviecatchapp.R
+import com.yusufcansenturk.moviecatchapp.databinding.RecentMovieItemBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
 import com.yusufcansenturk.moviecatchapp.model.Result
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.HomeFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 import java.util.*
 
@@ -29,17 +28,10 @@ class RecentMovieAdapter(private val isFirstScreen : Boolean = true): RecyclerVi
         notifyDataSetChanged()
     }
 
-    class MyCustomHolder(val view: View) : RecyclerView.ViewHolder(view){
-
-        val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
-        val txtGenre = view.findViewById<TextView>(R.id.txtGenre)
-        val posterView = view.findViewById<ImageView>(R.id.posterView)
-        val txtReleaseDate = view.findViewById<TextView>(R.id.txtReleaseDate)
-        val txtVoteAverage = view.findViewById<TextView>(R.id.txtVoteAverage)
-
+    class MyCustomHolder(val binding: RecentMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(data: Result, genreList: List<GenreData>) {
-            txtTitle.text = data.title
-            txtGenre.text = "genreList."
+            binding.txtTitle.text = data.title
+            binding.txtGenre.text = "genreList."
 
             val lang = Locale.getDefault().language
             var genres = ""
@@ -55,31 +47,37 @@ class RecentMovieAdapter(private val isFirstScreen : Boolean = true): RecyclerVi
             }
 
             genres = genres.substring(0, genres.length -2)
-            txtGenre.text = genres
+            binding.txtGenre.text = genres
 
-            txtReleaseDate.text = data.release_date
-            txtVoteAverage.text = data.vote_average.toString() + " / 10"
-            Glide.with(posterView).load(BASE_IMAGE_URL+data.poster_path).into(posterView)
+            binding.txtReleaseDate.text = data.release_date
+            binding.txtVoteAverage.text = data.vote_average.toString() + " / 10"
+            Glide.with(binding.posterView).load(BASE_IMAGE_URL+data.poster_path).into(binding.posterView)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCustomHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_movie_item, parent,false)
-        return MyCustomHolder(view)
+        val view = RecentMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        return RecentMovieAdapter.MyCustomHolder(view)
     }
 
     override fun getItemCount(): Int {
-        if (liveData==null) {
-            return 0
+        return if (liveData==null) {
+            0
         }else if (isFirstScreen) {
-            return 20
+            20
         }else {
-            return liveData!!.size
+            liveData!!.size
         }
     }
 
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
         holder.bind(liveData!![position], genreList!!)
+        holder.binding.apply {
+            posterView.setOnClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToFilmDetailsFragment(liveData!![position].id)
+                Navigation.findNavController(it).navigate(action)
+            }
+        }
     }
 }

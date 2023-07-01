@@ -48,7 +48,7 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
         }
 
         movieDetailsObserver()
-/*
+
         binding.btnMovieFavoriteList.setOnClickListener {
 
         }
@@ -60,7 +60,6 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
         binding.btnAddSave.setOnClickListener {
 
         }
- */
 
 
     }
@@ -82,8 +81,8 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
             binding.txtMovieTitle.text = movieDetail.original_title.toString()
             binding.txtMovieDescripton.text = movieDetail.overview.toString()
             binding.txtReleaseDate.text = movieDetail.release_date
-            Glide.with(binding.imgMovieBackground).load(Constants.BASE_IMAGE_URL +movieDetail.poster_path).into(binding.imgMovieBackground)
-            Glide.with(binding.imgMoviePoster).load(Constants.BASE_IMAGE_URL +movieDetail.backdrop_path).into(binding.imgMoviePoster)
+            Glide.with(binding.imgMovieBackground).load(Constants.BASE_IMAGE_URL +movieDetail.backdrop_path).into(binding.imgMovieBackground)
+            Glide.with(binding.imgMoviePoster).load(Constants.BASE_IMAGE_URL +movieDetail.poster_path).into(binding.imgMoviePoster)
 
         }
     }
