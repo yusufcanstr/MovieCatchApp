@@ -7,7 +7,6 @@
     tools:context=".ui.fragments.home.MainFragment">
 
 
-    
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:layout_width="match_parent"
         android:layout_height="60dp"

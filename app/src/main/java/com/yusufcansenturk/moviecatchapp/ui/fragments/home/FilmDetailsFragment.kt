@@ -83,7 +83,6 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
             binding.txtReleaseDate.text = movieDetail.release_date
             Glide.with(binding.imgMovieBackground).load(Constants.BASE_IMAGE_URL +movieDetail.backdrop_path).into(binding.imgMovieBackground)
             Glide.with(binding.imgMoviePoster).load(Constants.BASE_IMAGE_URL +movieDetail.poster_path).into(binding.imgMoviePoster)
-
         }
     }
 

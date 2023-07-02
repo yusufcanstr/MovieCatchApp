@@ -3,4 +3,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="first_title">Offine Database</string>
     <string name="first_subtitle">Create you favorite list navigation list navigate your list without internet.</string>
+
+    <string name="favori_list_frg">Favorite</string>
+    <string name="watch_list_frg">Watch List</string>
+    <string name="movie_lists_frg">Collections</string>
+
 </resources>
