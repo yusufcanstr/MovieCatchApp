@@ -1,4 +1,4 @@
-package com.yusufcansenturk.moviecatchapp.di.dao
+package com.yusufcansenturk.moviecatchapp.di.dao.genre
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -6,7 +6,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.databinding.RecentMovieItemBinding
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreData
 import com.yusufcansenturk.moviecatchapp.model.Result
 import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.HomeFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL

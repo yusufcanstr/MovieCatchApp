@@ -1,6 +1,5 @@
-package com.yusufcansenturk.moviecatchapp.di.dao
+package com.yusufcansenturk.moviecatchapp.di.dao.genre
 
-import androidx.lifecycle.LiveData
 import javax.inject.Inject
 
 class GenreRepository @Inject constructor(

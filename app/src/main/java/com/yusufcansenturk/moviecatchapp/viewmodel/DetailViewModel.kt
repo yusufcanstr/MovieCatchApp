@@ -3,6 +3,8 @@ package com.yusufcansenturk.moviecatchapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
+import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteRepository
 import com.yusufcansenturk.moviecatchapp.di.retrofit.RetrofitRepository
 import com.yusufcansenturk.moviecatchapp.model.MovieDetail
 import com.yusufcansenturk.moviecatchapp.util.UiState
@@ -11,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: RetrofitRepository
+    private val repository: RetrofitRepository,
+    private val favoriteRepository: FavoriteRepository
 ) : ViewModel(){
 
     private val _movieDetails = MutableLiveData<MovieDetail>()
@@ -20,6 +23,10 @@ class DetailViewModel @Inject constructor(
 
     fun getMovieDetail(movie_id:Int) {
         repository.getMoviesDetails(movie_id,_movieDetails)
+    }
+
+    fun addFavoriteMovie(favoriteData: FavoriteData) {
+        favoriteRepository.addMovieFavorite(favoriteData)
     }
 
 }

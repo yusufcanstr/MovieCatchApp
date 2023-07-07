@@ -11,8 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentFifthScreenBinding
-import com.yusufcansenturk.moviecatchapp.databinding.FragmentFourthScreenBinding
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreData
 import com.yusufcansenturk.moviecatchapp.util.StringHelper
 import com.yusufcansenturk.moviecatchapp.viewmodel.GenreViewModel
 import com.yusufcansenturk.moviecatchapp.viewmodel.HomePageViewModel

@@ -3,8 +3,10 @@ package com.yusufcansenturk.moviecatchapp.di.module
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreDao
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreDatabase
+import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteDao
+import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteDatabase
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreDao
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreDatabase
 import com.yusufcansenturk.moviecatchapp.di.retrofit.RetrofitServiceInstance
 import com.yusufcansenturk.moviecatchapp.prefs.MovieSesionManager
 import com.yusufcansenturk.moviecatchapp.util.Constants
@@ -42,6 +44,18 @@ object AppModule {
     @Singleton
     fun getDao(appDB: GenreDatabase): GenreDao {
         return appDB.getDAO()
+    }
+
+    @Provides
+    @Singleton
+    fun getFavoriteDB(context: Application): FavoriteDatabase {
+        return FavoriteDatabase.getFavoriteDB(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getFavoriteDao(DB: FavoriteDatabase): FavoriteDao {
+        return DB.getDAO()
     }
 
     @Provides

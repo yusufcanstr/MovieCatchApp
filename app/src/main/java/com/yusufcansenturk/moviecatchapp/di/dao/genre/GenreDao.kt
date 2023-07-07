@@ -1,11 +1,8 @@
-package com.yusufcansenturk.moviecatchapp.di.dao
+package com.yusufcansenturk.moviecatchapp.di.dao.genre
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import java.util.Objects
 
 @Dao
 interface GenreDao {

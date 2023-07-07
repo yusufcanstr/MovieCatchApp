@@ -1,4 +1,4 @@
-package com.yusufcansenturk.moviecatchapp.di.dao
+package com.yusufcansenturk.moviecatchapp.di.dao.genre
 
 import android.content.Context
 import androidx.room.Database

@@ -2,9 +2,8 @@ package com.yusufcansenturk.moviecatchapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreRepository
-import com.yusufcansenturk.moviecatchapp.model.Genre
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreData
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

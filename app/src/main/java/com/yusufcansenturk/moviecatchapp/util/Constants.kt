@@ -6,9 +6,10 @@ object Constants {
     val THEME_KEY = "isDarkMode"
     val FIRST_RUN_KEY = "isFirstRun"
     val PREF_NAME = "moviePref"
+    const val FAVORITE_DB_NAME = "favorite_movie_tbl"
 }
 enum class FavoriteTabs(val index: Int, val key: String) {
-    FAVORITE(0, "Favorite"),
+    FAVORITE(0, "FavoriteData"),
     WATCHLIST(1, "WatchList"),
     MOVIE_LISTS(2, "MovieLists")
 }

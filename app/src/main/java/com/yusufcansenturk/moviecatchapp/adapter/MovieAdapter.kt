@@ -1,16 +1,12 @@
 package com.yusufcansenturk.moviecatchapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.databinding.PopularMovieItemBinding
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreData
 import com.yusufcansenturk.moviecatchapp.model.Result
 import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.HomeFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL

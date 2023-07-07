@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentFilimDetailsBinding
+import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.util.Constants
 import com.yusufcansenturk.moviecatchapp.util.UiState
 import com.yusufcansenturk.moviecatchapp.viewmodel.DetailViewModel
@@ -50,7 +51,22 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
         movieDetailsObserver()
 
         binding.btnMovieFavoriteList.setOnClickListener {
-
+            viewModel.movieDetail.observe(viewLifecycleOwner) { movieDetail ->
+                viewModel.addFavoriteMovie(
+                    FavoriteData(
+                        movie_id = movieDetail.id,
+                        imdb_id = movieDetail.imdb_id,
+                        name = movieDetail.original_title,
+                        runtime = movieDetail.runtime,
+                        backdrop_path = movieDetail.backdrop_path,
+                        poster_path = movieDetail.poster_path,
+                        overview = movieDetail.overview,
+                        vote_average = movieDetail.vote_average,
+                        vote_count = movieDetail.vote_count,
+                        favorite_status = true
+                    )
+                )
+            }
         }
 
         binding.btnAddMovieList.setOnClickListener {

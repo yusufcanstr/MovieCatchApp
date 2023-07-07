@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.adapter.MovieAdapter
 import com.yusufcansenturk.moviecatchapp.adapter.RecentMovieAdapter
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentHomeBinding
-import com.yusufcansenturk.moviecatchapp.databinding.FragmentMainBinding
-import com.yusufcansenturk.moviecatchapp.di.dao.GenreData
+import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreData
 import com.yusufcansenturk.moviecatchapp.viewmodel.GenreViewModel
 import com.yusufcansenturk.moviecatchapp.viewmodel.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
