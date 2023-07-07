@@ -14,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val repository: RetrofitRepository,
-    private val favoriteRepository: FavoriteRepository
 ) : ViewModel(){
 
     private val _movieDetails = MutableLiveData<MovieDetail>()
@@ -25,8 +24,5 @@ class DetailViewModel @Inject constructor(
         repository.getMoviesDetails(movie_id,_movieDetails)
     }
 
-    fun addFavoriteMovie(favoriteData: FavoriteData) {
-        favoriteRepository.addMovieFavorite(favoriteData)
-    }
 
 }

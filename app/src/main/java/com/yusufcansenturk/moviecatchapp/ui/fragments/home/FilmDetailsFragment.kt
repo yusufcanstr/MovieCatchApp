@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentFilimDetailsBinding
@@ -12,6 +13,7 @@ import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.util.Constants
 import com.yusufcansenturk.moviecatchapp.util.UiState
 import com.yusufcansenturk.moviecatchapp.viewmodel.DetailViewModel
+import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.RoundingMode
 import java.util.*
@@ -21,6 +23,7 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentFilimDetailsBinding
     private val viewModel: DetailViewModel by viewModels()
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +55,7 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
 
         binding.btnMovieFavoriteList.setOnClickListener {
             viewModel.movieDetail.observe(viewLifecycleOwner) { movieDetail ->
-                viewModel.addFavoriteMovie(
+                favoriteViewModel.addFavoriteMovie(
                     FavoriteData(
                         movie_id = movieDetail.id,
                         imdb_id = movieDetail.imdb_id,

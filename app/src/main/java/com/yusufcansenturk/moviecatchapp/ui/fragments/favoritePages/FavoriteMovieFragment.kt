@@ -5,7 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusufcansenturk.moviecatchapp.R
+import com.yusufcansenturk.moviecatchapp.adapter.FavoriteListAdapter
+import com.yusufcansenturk.moviecatchapp.databinding.FragmentFavoriteBinding
+import com.yusufcansenturk.moviecatchapp.databinding.FragmentFavoriteMovieBinding
+import com.yusufcansenturk.moviecatchapp.databinding.FragmentMovieListsBinding
+import com.yusufcansenturk.moviecatchapp.util.FavoriteClickType
+import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_PARAM1 = "param1"
@@ -13,12 +21,32 @@ private const val ARG_PARAM1 = "param1"
 @AndroidEntryPoint
 class FavoriteMovieFragment : Fragment() {
 
+    private lateinit var binding: FragmentFavoriteMovieBinding
+    private val viewModel: FavoriteViewModel by viewModels()
+    private lateinit var adapter : FavoriteListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        binding = FragmentFavoriteMovieBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        return inflater.inflate(R.layout.fragment_favorite_movie, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadFavoriteData()
+        viewModel.favoriteData.observe(viewLifecycleOwner) { movieList ->
+            movieList?.let {
+                adapter = FavoriteListAdapter(movieList) { movieList, type ->
+
+                }
+                binding.favoriteList.adapter = adapter
+                binding.favoriteList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            }
+        }
+
     }
 
     companion object {

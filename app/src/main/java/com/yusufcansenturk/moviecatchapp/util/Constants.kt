@@ -13,3 +13,7 @@ enum class FavoriteTabs(val index: Int, val key: String) {
     WATCHLIST(1, "WatchList"),
     MOVIE_LISTS(2, "MovieLists")
 }
+
+enum class FavoriteClickType {
+    DELETE
+}
