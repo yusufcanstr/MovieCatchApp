@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.adapter.FavoriteListAdapter
-import com.yusufcansenturk.moviecatchapp.databinding.FragmentFavoriteBinding
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentFavoriteMovieBinding
-import com.yusufcansenturk.moviecatchapp.databinding.FragmentMovieListsBinding
 import com.yusufcansenturk.moviecatchapp.util.FavoriteClickType
 import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,14 +33,21 @@ class FavoriteMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter = FavoriteListAdapter(emptyList()) { favoriteData, type ->
+            when (type) {
+                FavoriteClickType.DELETE -> {
+                    viewModel.deleteMovie(favoriteData.movie_id)
+                }
+            }
+        }
+
+        binding.favoriteList.adapter = adapter
+        binding.favoriteList.layoutManager = LinearLayoutManager(requireContext())
+
         viewModel.loadFavoriteData()
         viewModel.favoriteData.observe(viewLifecycleOwner) { movieList ->
             movieList?.let {
-                adapter = FavoriteListAdapter(movieList) { movieList, type ->
-
-                }
-                binding.favoriteList.adapter = adapter
-                binding.favoriteList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter.updateData(movieList)
             }
         }
 

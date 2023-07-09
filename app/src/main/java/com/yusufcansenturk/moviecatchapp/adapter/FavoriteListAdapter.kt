@@ -44,4 +44,9 @@ class FavoriteListAdapter(
             }
         }
     }
+
+    fun updateData(newMovieList: List<FavoriteData>) {
+        favoriteList = newMovieList
+        notifyDataSetChanged()
+    }
 }

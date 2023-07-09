@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteRepository
-import com.yusufcansenturk.moviecatchapp.model.MovieDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val favoriteRepository: FavoriteRepository
-) : ViewModel(){
+) : ViewModel() {
 
     private val _favoriteData = MutableLiveData<List<FavoriteData>>()
     val favoriteData: LiveData<List<FavoriteData>>
@@ -25,8 +24,14 @@ class FavoriteViewModel @Inject constructor(
     }
 
     fun loadFavoriteData() {
+        favoriteRepository.favoriteAllData.observeForever { favoriteDataList ->
+            _favoriteData.value = favoriteDataList
+        }
+    }
+
+    fun deleteMovie(movie_id: Int) {
         viewModelScope.launch {
-            _favoriteData.value = favoriteRepository.favoriteAllData
+            favoriteRepository.deleteMovie(movie_id)
         }
     }
 
