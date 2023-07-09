@@ -7,6 +7,8 @@ import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteDao
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteDatabase
 import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreDao
 import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreDatabase
+import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchDao
+import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchDatabase
 import com.yusufcansenturk.moviecatchapp.di.retrofit.RetrofitServiceInstance
 import com.yusufcansenturk.moviecatchapp.prefs.MovieSesionManager
 import com.yusufcansenturk.moviecatchapp.util.Constants
@@ -32,6 +34,18 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSessionManager(preferences: SharedPreferences) = MovieSesionManager(preferences)
+
+    @Provides
+    @Singleton
+    fun getWatchDB(context: Application): WatchDatabase {
+        return WatchDatabase.getWatchDB(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getWatchDao(DB: WatchDatabase): WatchDao {
+        return DB.getDAO()
+    }
 
     @Provides
     @Singleton

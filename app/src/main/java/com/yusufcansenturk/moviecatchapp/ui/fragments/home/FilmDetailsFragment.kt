@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentFilimDetailsBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
+import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchData
 import com.yusufcansenturk.moviecatchapp.util.Constants
 import com.yusufcansenturk.moviecatchapp.util.UiState
 import com.yusufcansenturk.moviecatchapp.viewmodel.DetailViewModel
@@ -77,7 +78,20 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnAddSave.setOnClickListener {
-
+            viewModel.movieDetail.observe(viewLifecycleOwner) { movieDetail ->
+                movieDetail.let {
+                    favoriteViewModel.addMovieWatchList(
+                        WatchData(
+                            movie_id = movieDetail.id,
+                            imdb_id = movieDetail.imdb_id,
+                            name = movieDetail.title,
+                            backdrop_path = movieDetail.backdrop_path,
+                            poster_path = movieDetail.poster_path,
+                            watch_status = true
+                        )
+                    )
+                }
+            }
         }
 
 
