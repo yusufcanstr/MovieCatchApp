@@ -13,4 +13,7 @@ class WatchRepository @Inject constructor(
         watchDao.addWatchList(watchData)
     }
 
+    fun deleteMovieWatchList(movie_id:Int) {
+        watchDao.deleteMovie(movie_id)
+    }
 }

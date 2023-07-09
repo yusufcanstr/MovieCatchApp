@@ -57,4 +57,10 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    fun deleteMovieWatchList(movie_id: Int) {
+        viewModelScope.launch {
+            watchRepository.deleteMovieWatchList(movie_id)
+        }
+    }
+
 }

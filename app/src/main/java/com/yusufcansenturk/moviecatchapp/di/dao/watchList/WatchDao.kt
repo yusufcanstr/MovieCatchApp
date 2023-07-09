@@ -13,4 +13,7 @@ interface WatchDao {
 
     @Query("SELECT * FROM watch_movie_tbl WHERE watch_status = 1")
     fun readAllData() : LiveData<List<WatchData>>
+
+    @Query("DELETE FROM watch_movie_tbl WHERE movie_id = :movie_id")
+    fun deleteMovie(movie_id:Int)
 }
