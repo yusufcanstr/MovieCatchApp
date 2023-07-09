@@ -22,6 +22,15 @@ class FavoriteViewModel @Inject constructor(
     val favoriteData: LiveData<List<FavoriteData>>
         get() = _favoriteData
 
+    private val _watchData = MutableLiveData<List<WatchData>>()
+    val watchData: LiveData<List<WatchData>>
+        get() = _watchData
+
+    init {
+        loadWatchData()
+        loadFavoriteData()
+    }
+
     fun addFavoriteMovie(favoriteData: FavoriteData) {
         favoriteRepository.addMovieFavorite(favoriteData)
     }
@@ -40,6 +49,12 @@ class FavoriteViewModel @Inject constructor(
 
     fun addMovieWatchList(watchData: WatchData) {
         watchRepository.addMovieWatchList(watchData)
+    }
+
+    fun loadWatchData() {
+        watchRepository.watchAllData.observeForever { watchDataList ->
+            _watchData.value = watchDataList
+        }
     }
 
 }
