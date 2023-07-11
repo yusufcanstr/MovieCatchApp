@@ -8,6 +8,7 @@ object Constants {
     val PREF_NAME = "moviePref"
     const val FAVORITE_DB_NAME = "favorite_movie_tbl"
     const val WATCH_DB_NAME = "watch_movie_tbl"
+    const val COLLECTION_NAME = "collectionDB"
 }
 enum class FavoriteTabs(val index: Int, val key: String) {
     FAVORITE(0, "FavoriteData"),

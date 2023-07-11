@@ -3,6 +3,8 @@ package com.yusufcansenturk.moviecatchapp.di.module
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionDao
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionDatabase
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteDao
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteDatabase
 import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreDao
@@ -45,6 +47,18 @@ object AppModule {
     @Singleton
     fun getWatchDao(DB: WatchDatabase): WatchDao {
         return DB.getDAO()
+    }
+
+    @Provides
+    @Singleton
+    fun getCollectionDB(context: Application): CollectionDatabase {
+        return CollectionDatabase.getCollectionDB(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getCollectionDao(DB: CollectionDatabase): CollectionDao {
+        return DB.getDao()
     }
 
     @Provides

@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.yusufcansenturk.moviecatchapp.R
+import com.yusufcansenturk.moviecatchapp.databinding.FragmentCreateCollectionBinding
+import com.yusufcansenturk.moviecatchapp.databinding.FragmentFavoriteMovieBinding
+import com.yusufcansenturk.moviecatchapp.databinding.FragmentMovieListsBinding
+import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_PARAM1 = "param1"
@@ -13,11 +19,23 @@ private const val ARG_PARAM1 = "param1"
 @AndroidEntryPoint
 class MovieListsFragment : Fragment() {
 
+    private lateinit var binding: FragmentMovieListsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_lists, container, false)
+    ): View {
+        binding = FragmentMovieListsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnCreateCollection.setOnClickListener {
+            findNavController().navigate(R.id.action_favoriteFragment_to_createCollectionFragment)
+        }
+
     }
 
     companion object {

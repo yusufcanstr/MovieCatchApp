@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionRepository
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteRepository
 import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchData
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val favoriteRepository: FavoriteRepository,
-    private val watchRepository: WatchRepository
+    private val watchRepository: WatchRepository,
+    private val collectionRepository: CollectionRepository
 ) : ViewModel() {
 
     private val _favoriteData = MutableLiveData<List<FavoriteData>>()
@@ -61,6 +63,10 @@ class FavoriteViewModel @Inject constructor(
         viewModelScope.launch {
             watchRepository.deleteMovieWatchList(movie_id)
         }
+    }
+
+    fun createCollection(collectionName:String) {
+        collectionRepository.createTable(collectionName)
     }
 
 }

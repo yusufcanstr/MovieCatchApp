@@ -18,7 +18,11 @@
         android:id="@+id/favoriteFragment"
         android:name="com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_createCollectionFragment"
+            app:destination="@id/createCollectionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.SettingsFragment"
@@ -35,5 +39,13 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
+    </dialog>
+    <dialog
+        android:id="@+id/createCollectionFragment"
+        android:name="com.yusufcansenturk.moviecatchapp.ui.fragments.favoritePages.CreateCollectionFragment"
+        android:label="CreateCollectionFragment" >
+        <action
+            android:id="@+id/action_createCollectionFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </dialog>
 </navigation>
