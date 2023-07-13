@@ -85,7 +85,7 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    private fun loadCollection() {
+    fun loadCollection() {
         collectionRepository.collectionList.observeForever{ collectionList ->
             _collection.value = collectionList
         }
@@ -97,6 +97,10 @@ class FavoriteViewModel @Inject constructor(
                 _collectionData.value = collectionWithCollectionData
             }
         }
+    }
+
+    fun addMovieToCollection(collectionData: CollectionData) {
+        collectionRepository.addMovieToCollection(collectionData)
     }
 
 }

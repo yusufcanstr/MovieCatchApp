@@ -17,4 +17,8 @@ class CollectionRepository @Inject constructor(
         return collectionDao.getCollectionWithCollectionData(collectionName)
     }
 
+    fun addMovieToCollection(collectionData: CollectionData) {
+        collectionDao.addMovieToCollection(collectionData)
+    }
+
 }

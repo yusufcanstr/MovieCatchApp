@@ -22,4 +22,7 @@ interface CollectionDao {
     @Query("SELECT * FROM collection_tbl WHERE collectionName = :collectionName")
     fun getCollectionWithCollectionData(collectionName:String) : LiveData<List<CollectionWithCollectionData>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addMovieToCollection(collectionData: CollectionData)
+
 }

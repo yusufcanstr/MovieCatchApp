@@ -5,19 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentFilimDetailsBinding
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchData
 import com.yusufcansenturk.moviecatchapp.util.Constants
-import com.yusufcansenturk.moviecatchapp.util.UiState
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.Collection
+import com.yusufcansenturk.moviecatchapp.util.toast
 import com.yusufcansenturk.moviecatchapp.viewmodel.DetailViewModel
 import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.RoundingMode
-import java.util.*
 
 @AndroidEntryPoint
 class FilmDetailsFragment : BottomSheetDialogFragment() {
@@ -26,11 +27,6 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
     private val viewModel: DetailViewModel by viewModels()
     private val favoriteViewModel: FavoriteViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +49,7 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
         }
 
         movieDetailsObserver()
+        favoriteViewModel.loadCollection()
 
         binding.btnMovieFavoriteList.setOnClickListener {
             viewModel.movieDetail.observe(viewLifecycleOwner) { movieDetail ->
@@ -73,7 +70,37 @@ class FilmDetailsFragment : BottomSheetDialogFragment() {
             }
         }
 
+        val checkedItem = 1
         binding.btnAddMovieList.setOnClickListener {
+            val collectionList = favoriteViewModel.collection.value!!
+            val collectionNames = collectionList.map { it.collectionName }.toTypedArray()
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Choose collection")
+                .setNeutralButton("cancel") { dialog, which ->
+
+                }
+                .setSingleChoiceItems(collectionNames, checkedItem) { dialog, which ->
+                    viewModel.movieDetail.observe(viewLifecycleOwner) { movieDetail ->
+                        favoriteViewModel.addMovieToCollection(
+                            CollectionData(
+                                collectionName = collectionList[which].collectionName,
+                                movie_id = movieDetail.id,
+                                imdb_id = movieDetail.imdb_id,
+                                name = movieDetail.title,
+                                runtime = movieDetail.runtime,
+                                backdrop_path = movieDetail.backdrop_path,
+                                poster_path = movieDetail.poster_path,
+                                overview = movieDetail.overview,
+                                vote_average = movieDetail.vote_average,
+                                vote_count = movieDetail.vote_count,
+                                collection_status = true
+                            )
+                        )
+                        toast("The film has been successfully registered in the collection.")
+                    }
+                }
+                .show()
 
         }
 
