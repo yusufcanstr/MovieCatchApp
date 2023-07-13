@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.Collection
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionData
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionRepository
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionWithCollectionData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteRepository
 import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchData
@@ -30,9 +31,18 @@ class FavoriteViewModel @Inject constructor(
     val watchData: LiveData<List<WatchData>>
         get() = _watchData
 
+    private val _collection = MutableLiveData<List<Collection>>()
+    val collection : LiveData<List<Collection>>
+        get() = _collection
+
+    private val _collectionData = MutableLiveData<List<CollectionWithCollectionData>>()
+    val collectionData : LiveData<List<CollectionWithCollectionData>>
+        get() = _collectionData
+
     init {
         loadWatchData()
         loadFavoriteData()
+        loadCollection()
     }
 
     fun addFavoriteMovie(favoriteData: FavoriteData) {
@@ -72,6 +82,20 @@ class FavoriteViewModel @Inject constructor(
             collectionRepository.createCollection(
                 Collection(collectionName)
             )
+        }
+    }
+
+    private fun loadCollection() {
+        collectionRepository.collectionList.observeForever{ collectionList ->
+            _collection.value = collectionList
+        }
+    }
+
+    fun loadCollectionData(collectionName:String) {
+        viewModelScope.launch {
+            collectionRepository.getCollectionDataList(collectionName).observeForever { collectionWithCollectionData ->
+                _collectionData.value = collectionWithCollectionData
+            }
         }
     }
 

@@ -9,7 +9,7 @@ import com.yusufcansenturk.moviecatchapp.util.Constants.COLLECTION_NAME
 @Entity(tableName = COLLECTION_DATA)
 data class CollectionData(
     @PrimaryKey(autoGenerate = true) val id:Int = 0,
-    @ColumnInfo(name = "collection") val collectionName:String,
+    @ColumnInfo(name = "collectionName") val collectionName:String,
     @ColumnInfo(name = "movie_id") val movie_id: Int,
     @ColumnInfo(name = "imdb_id") val imdb_id: String,
     @ColumnInfo(name = "name") val name: String,

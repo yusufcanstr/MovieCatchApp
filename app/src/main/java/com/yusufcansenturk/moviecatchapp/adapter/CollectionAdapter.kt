@@ -6,13 +6,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.databinding.ItemCollectionBinding
-import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionData
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.Collection
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionWithCollectionData
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 
 class CollectionAdapter(
-    private val collection: List<Collection>,
-    private val collectionData: List<CollectionData>
+    private val collection: List<Collection>
 ) : RecyclerView.Adapter<CollectionAdapter.MyCustomHolder>() {
 
     class MyCustomHolder(val binding: ItemCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -26,15 +25,8 @@ class CollectionAdapter(
             binding.moviePoster6,
         )
 
-        fun bindItem(collectionName:Collection, collectionData: CollectionData) {
-            binding.collectionName.text = collectionData.collectionName
-            val lastSixPosters = collectionData.poster_path!!.takeLast(6)
-
-            for (i in lastSixPosters.indices) {
-                val posterUrl = BASE_IMAGE_URL+lastSixPosters[i]
-                val imageView = imageViews[i]
-                Glide.with(imageView).load(posterUrl).into(imageView)
-            }
+        fun bindItem(collection: Collection) {
+            binding.collectionName.text = collection.collectionName.toString()
 
         }
     }
@@ -50,9 +42,7 @@ class CollectionAdapter(
     }
 
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
-        val collectionName = collection[position]
-        val collectionData = collectionData[position]
-
-        holder.bindItem(collectionName, collectionData)
+        val collection = collection[position]
+        holder.bindItem(collection)
     }
 }

@@ -33,6 +33,16 @@ class MovieListsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.collection.observe(viewLifecycleOwner) {collection ->
+            collection?.let {
+                binding.favoriteList.apply {
+                    adapter = CollectionAdapter(collection)
+                    binding.favoriteList.adapter = adapter
+                    binding.favoriteList.layoutManager = GridLayoutManager(requireContext(),2)
+                }
+            }
+        }
+
         binding.btnCreateCollection.setOnClickListener {
             findNavController().navigate(R.id.action_favoriteFragment_to_createCollectionFragment)
         }
