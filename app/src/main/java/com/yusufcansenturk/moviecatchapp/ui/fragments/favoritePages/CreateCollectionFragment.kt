@@ -21,11 +21,6 @@ class CreateCollectionFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCreateCollectionBinding
     private val viewModel: FavoriteViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

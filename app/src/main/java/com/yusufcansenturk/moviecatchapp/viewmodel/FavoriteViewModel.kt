@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.Collection
+import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionData
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionRepository
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteRepository
@@ -65,8 +67,12 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    fun createCollection(collectionName:String) {
-        collectionRepository.createTable(collectionName)
+    fun createCollection(collectionName :String) {
+        viewModelScope.launch {
+            collectionRepository.createCollection(
+                Collection(collectionName)
+            )
+        }
     }
 
 }

@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.yusufcansenturk.moviecatchapp.R
-import com.yusufcansenturk.moviecatchapp.databinding.FragmentCreateCollectionBinding
-import com.yusufcansenturk.moviecatchapp.databinding.FragmentFavoriteMovieBinding
+import com.yusufcansenturk.moviecatchapp.adapter.CollectionAdapter
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentMovieListsBinding
 import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +20,7 @@ private const val ARG_PARAM1 = "param1"
 class MovieListsFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieListsBinding
+    private val viewModel: FavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
