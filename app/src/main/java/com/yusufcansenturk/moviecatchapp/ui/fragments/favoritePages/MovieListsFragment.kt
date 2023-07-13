@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.yusufcansenturk.moviecatchapp.R
 import com.yusufcansenturk.moviecatchapp.adapter.CollectionAdapter
 import com.yusufcansenturk.moviecatchapp.databinding.FragmentMovieListsBinding
+import com.yusufcansenturk.moviecatchapp.util.FavoriteClickType
+import com.yusufcansenturk.moviecatchapp.util.toast
 import com.yusufcansenturk.moviecatchapp.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +38,15 @@ class MovieListsFragment : Fragment() {
         viewModel.collection.observe(viewLifecycleOwner) {collection ->
             collection?.let {
                 binding.favoriteList.apply {
-                    adapter = CollectionAdapter(collection)
+                    adapter = CollectionAdapter(collection) { collection, type ->
+                        when (type) {
+                            FavoriteClickType.COLLECTION_DELETE -> {
+                                viewModel.deleteCollection(collection.collectionName)
+                                toast("Collection deleted !")
+                            }
+                            else -> {}
+                        }
+                    }
                     binding.favoriteList.adapter = adapter
                     binding.favoriteList.layoutManager = GridLayoutManager(requireContext(),2)
                 }

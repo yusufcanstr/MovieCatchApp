@@ -19,5 +19,5 @@ enum class FavoriteTabs(val index: Int, val key: String) {
 }
 
 enum class FavoriteClickType {
-    DELETE,POSTER
+    DELETE,POSTER,COLLECTION_DELETE
 }

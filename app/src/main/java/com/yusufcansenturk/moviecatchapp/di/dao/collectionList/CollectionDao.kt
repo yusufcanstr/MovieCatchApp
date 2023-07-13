@@ -25,4 +25,10 @@ interface CollectionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addMovieToCollection(collectionData: CollectionData)
 
+    @Query("DELETE FROM collection_tbl WHERE collectionName = :collectionName")
+    fun deleteCollection(collectionName:String)
+
+    @Query("DELETE FROM collection_data_tbl WHERE collectionName = :collectionName")
+    fun deleteCollectionData(collectionName:String)
+
 }

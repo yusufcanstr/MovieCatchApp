@@ -21,4 +21,9 @@ class CollectionRepository @Inject constructor(
         collectionDao.addMovieToCollection(collectionData)
     }
 
+    fun deleteCollection(collectionName:String) {
+        collectionDao.deleteCollection(collectionName)
+        collectionDao.deleteCollectionData(collectionName)
+    }
+
 }

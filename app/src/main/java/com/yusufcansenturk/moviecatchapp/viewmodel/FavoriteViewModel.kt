@@ -103,4 +103,10 @@ class FavoriteViewModel @Inject constructor(
         collectionRepository.addMovieToCollection(collectionData)
     }
 
+    fun deleteCollection(collectionName:String) {
+        viewModelScope.launch {
+            collectionRepository.deleteCollection(collectionName)
+        }
+    }
+
 }
