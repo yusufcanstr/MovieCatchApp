@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.room.Transaction
 import androidx.sqlite.db.SupportSQLiteQuery
+import com.yusufcansenturk.moviecatchapp.util.UiState
 
 @Dao
 interface CollectionDao {
@@ -30,5 +31,8 @@ interface CollectionDao {
 
     @Query("DELETE FROM collection_data_tbl WHERE collectionName = :collectionName")
     fun deleteCollectionData(collectionName:String)
+
+    @Query("SELECT * FROM collection_data_tbl WHERE collectionName = :collectionName GROUP BY imdb_id")
+    fun getCollectionData(collectionName: String) :LiveData<List<CollectionData>>
 
 }

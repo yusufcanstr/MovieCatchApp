@@ -3,12 +3,16 @@ package com.yusufcansenturk.moviecatchapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.databinding.ItemCollectionBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.Collection
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionData
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionWithCollectionData
+import com.yusufcansenturk.moviecatchapp.ui.fragments.favoritePages.CollectionMoviesFragmentDirections
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.FavoriteFragmentDirections
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.HomeFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 import com.yusufcansenturk.moviecatchapp.util.FavoriteClickType
 
@@ -41,6 +45,10 @@ class CollectionAdapter(
         holder.binding.apply {
             btnCollectionDelete.setOnClickListener {
                 onItemClick(collection,FavoriteClickType.COLLECTION_DELETE)
+            }
+            itemCollection.setOnClickListener {
+                val action = FavoriteFragmentDirections.actionFavoriteFragmentToCollectionMoviesFragment(collection.collectionName)
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }

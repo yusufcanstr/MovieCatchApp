@@ -12,6 +12,7 @@
     android:background="#E2D7CA">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_collection"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:background="@color/actioncolorWhite"

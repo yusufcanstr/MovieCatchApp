@@ -12,6 +12,7 @@ import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteRepository
 import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchData
 import com.yusufcansenturk.moviecatchapp.di.dao.watchList.WatchRepository
+import com.yusufcansenturk.moviecatchapp.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,8 +36,8 @@ class FavoriteViewModel @Inject constructor(
     val collection : LiveData<List<Collection>>
         get() = _collection
 
-    private val _collectionData = MutableLiveData<List<CollectionWithCollectionData>>()
-    val collectionData : LiveData<List<CollectionWithCollectionData>>
+    private val _collectionData = MutableLiveData<UiState<List<CollectionData>>>()
+    val collectionData : LiveData<UiState<List<CollectionData>>>
         get() = _collectionData
 
     init {
@@ -93,8 +94,8 @@ class FavoriteViewModel @Inject constructor(
 
     fun loadCollectionData(collectionName:String) {
         viewModelScope.launch {
-            collectionRepository.getCollectionDataList(collectionName).observeForever { collectionWithCollectionData ->
-                _collectionData.value = collectionWithCollectionData
+            collectionRepository.getCollectionData(collectionName).observeForever { collectionData ->
+                _collectionData.value = collectionData
             }
         }
     }

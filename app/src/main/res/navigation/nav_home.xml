@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_createCollectionFragment"
             app:destination="@id/createCollectionFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_collectionMoviesFragment"
+            app:destination="@id/collectionMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -48,4 +51,16 @@
             android:id="@+id/action_createCollectionFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/collectionMoviesFragment"
+        android:name="com.yusufcansenturk.moviecatchapp.ui.fragments.favoritePages.CollectionMoviesFragment"
+        android:label="fragment_collection_movies"
+        tools:layout="@layout/fragment_collection_movies" >
+        <argument
+            android:name="collectionName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_collectionMoviesFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
 </navigation>
