@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:background="@color/actioncolorWhite"
         android:orientation="vertical">
 
         <ImageView
@@ -25,74 +26,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:src="@drawable/cinema"
+            app:layout_constraintBottom_toTopOf="@+id/collectionName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/movie_poster_1"
-                    android:layout_width="60dp"
-                    android:layout_height="90dp"/>
-
-                <ImageView
-                    android:id="@+id/movie_poster_2"
-                    android:layout_width="60dp"
-                    android:layout_height="90dp"/>
-
-                <ImageView
-                    android:id="@+id/movie_poster_3"
-                    android:layout_width="60dp"
-                    android:layout_height="90dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/movie_poster_4"
-                    android:layout_width="60dp"
-                    android:layout_height="90dp"/>
-
-                <ImageView
-                    android:id="@+id/movie_poster_5"
-                    android:layout_width="60dp"
-                    android:layout_height="90dp"/>
-
-                <ImageView
-                    android:id="@+id/movie_poster_6"
-                    android:layout_width="60dp"
-                    android:layout_height="90dp"/>
-            </LinearLayout>
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/btn_collection_delete" />
 
         <TextView
             android:id="@+id/collectionName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="6dp"
             android:fontFamily="@font/robotocondensed_regular"
             android:text="Deneme 2"
             android:textColor="@color/textColor"
             android:textSize="17sp"
-            android:layout_margin="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -19,15 +19,6 @@ class CollectionAdapter(
 
     class MyCustomHolder(val binding: ItemCollectionBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val imageViews : List<ImageView> = listOf(
-            binding.moviePoster1,
-            binding.moviePoster2,
-            binding.moviePoster3,
-            binding.moviePoster4,
-            binding.moviePoster5,
-            binding.moviePoster6,
-        )
-
         fun bindItem(collection: Collection) {
             binding.collectionName.text = collection.collectionName.toString()
 
