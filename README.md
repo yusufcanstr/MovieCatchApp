@@ -57,7 +57,20 @@
                 <img src="https://github.com/yusufcanstr/MovieCatchApp/assets/88708663/e45a98ad-8da6-49fa-9666-39648ad17194" alt="Telefon Ekran Görüntüsü">
             </td>
         </tr>
+        <tr>
+            <td>
+                Loading Notification
+            </td>    
+            <td>
+                Error Notification
+            </td>       
+        </tr>
+        <tr>
+            <td>
+                <img src="https://github.com/yusufcanstr/MovieCatchApp/assets/88708663/0a66bcad-09f9-4ad4-abaa-c870e8ebdec3" alt="Telefon Ekran Görüntüsü">
+            </td>    
+            <td>
+                <img src="https://github.com/yusufcanstr/MovieCatchApp/assets/88708663/62394d80-6f8b-40f5-a883-a549665181d1" alt="Telefon Ekran Görüntüsü">
+            </td>
+        </tr>
 </table>        
-
-
-
