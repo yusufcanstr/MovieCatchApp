@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_collectionMoviesFragment"
             app:destination="@id/collectionMoviesFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

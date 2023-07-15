@@ -2,10 +2,13 @@ package com.yusufcansenturk.moviecatchapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.databinding.ItemFavoriteBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.favoriteList.FavoriteData
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.FavoriteFragmentDirections
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.HomeFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 import com.yusufcansenturk.moviecatchapp.util.FavoriteClickType
 
@@ -41,6 +44,10 @@ class FavoriteListAdapter(
         holder.binding.apply {
             btnDelete.setOnClickListener {
                 onItemClick(favoriteList[position], FavoriteClickType.DELETE)
+            }
+            itemFavorite.setOnClickListener {
+                val action = FavoriteFragmentDirections.actionFavoriteFragmentToFilmDetailsFragment(favoriteList[position].movie_id)
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }
