@@ -2,10 +2,12 @@ package com.yusufcansenturk.moviecatchapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.databinding.PopularMovieItemBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.collectionList.CollectionData
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.FavoriteFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 
 class CollectionMovieAdapter(
@@ -32,7 +34,8 @@ class CollectionMovieAdapter(
         holder.bind(collectionList[position])
         holder.binding.apply {
             posterView.setOnClickListener {
-
+                val action = FavoriteFragmentDirections.actionFavoriteFragmentToFilmDetailsFragment(collectionList[position].movie_id)
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }

@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginRight="8dp">
-    
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,21 +20,22 @@
             <ImageView
                 android:id="@+id/posterView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </androidx.cardview.widget.CardView>
-        
+
         <TextView
             android:id="@+id/txtTitle"
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"/>
+            android:layout_marginTop="3dp"
+            android:text="Title" />
+
         <TextView
             android:id="@+id/txtGenre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"/>
+            android:text="Title" />
     </LinearLayout>
 
 </RelativeLayout>
