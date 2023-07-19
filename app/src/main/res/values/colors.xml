@@ -25,4 +25,6 @@
     <color name="tab_unselected">#4D000000</color>
     <color name="nav_bar_color">#EEF8F8</color>
 
+    <color name="white_moke">#F5F5F5</color>
+
 </resources>

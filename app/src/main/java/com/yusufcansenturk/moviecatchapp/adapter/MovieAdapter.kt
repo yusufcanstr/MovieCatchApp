@@ -14,8 +14,8 @@ import java.util.*
 
 class MovieAdapter(private val isFirstScreen : Boolean = true): RecyclerView.Adapter<MovieAdapter.MyCustomHolder>() {
 
-    var liveData: List<Result>? = null
-    var genreList: List<GenreData>? = null
+    private var liveData: List<Result>? = null
+    private var genreList: List<GenreData>? = null
 
     //Image
     // https://image.tmdb.org/t/p/w500/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg
@@ -34,20 +34,20 @@ class MovieAdapter(private val isFirstScreen : Boolean = true): RecyclerView.Ada
 
             val lang = Locale.getDefault().language
             var genres = ""
-            for(id in data.genre_ids) {
+            for(id in data.genreIds) {
                 val result = genreList.find { x -> x.genre_id == id }
                 result?.let {
-                    if (lang == "tr") {
-                        genres += result!!.tr_name + ", "
+                    genres += if (lang == "tr") {
+                        result.tr_name + ", "
                     }else {
-                        genres += result!!.en_name + ", "
+                        result.en_name + ", "
                     }
                 }
             }
 
             genres = genres.substring(0, genres.length -2)
             binding.txtGenre.text = genres
-            Glide.with(binding.posterView).load(BASE_IMAGE_URL+data.poster_path).into(binding.posterView)
+            Glide.with(binding.posterView).load(BASE_IMAGE_URL+data.posterPath).into(binding.posterView)
         }
 
     }

@@ -1,16 +1,23 @@
 package com.yusufcansenturk.moviecatchapp.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Result(
     val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: List<Int>,
-    val id:Int,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
+    @SerializedName("genre_ids")
+    val genreIds: List<Int>,
+    val id: Int,
     val overview: String,
     val popularity: Double,
-    val poster_path: String,
-    val release_date: String,
-    val title:String,
-    val vote_average:Double,
-    var genrestringTr:String,
-    var genrestring:String
+    @SerializedName("poster_path")
+    val posterPath: String,
+    @SerializedName("release_date")
+    val releaseDate: String,
+    val title: String,
+    @SerializedName("vote_average")
+    val voteAverage: Double,
+    var genrestringTr: String,
+    var genrestring: String
 )

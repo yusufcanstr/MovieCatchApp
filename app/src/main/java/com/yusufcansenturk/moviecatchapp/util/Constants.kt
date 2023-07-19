@@ -1,6 +1,7 @@
 package com.yusufcansenturk.moviecatchapp.util
 
 object Constants {
+    const val API_KEY = "4f9a882954141dfe0f929b1d33cc6686"
     const val BASE_URL = "https://api.themoviedb.org/"
     const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     val THEME_KEY = "isDarkMode"

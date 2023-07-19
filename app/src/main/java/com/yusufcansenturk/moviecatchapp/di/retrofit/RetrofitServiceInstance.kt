@@ -1,9 +1,11 @@
 package com.yusufcansenturk.moviecatchapp.di.retrofit
 
+import androidx.lifecycle.LiveData
 import com.yusufcansenturk.moviecatchapp.model.Genre
 import com.yusufcansenturk.moviecatchapp.model.Movie
 import com.yusufcansenturk.moviecatchapp.model.MovieDetail
 import com.yusufcansenturk.moviecatchapp.model.Trailer
+import com.yusufcansenturk.moviecatchapp.util.Constants.API_KEY
 import com.yusufcansenturk.moviecatchapp.util.UiState
 import retrofit2.Call
 import retrofit2.http.GET
@@ -30,4 +32,9 @@ interface RetrofitServiceInstance {
     @GET("3/movie/{movie_id}?api_key=4f9a882954141dfe0f929b1d33cc6686")
     fun getMovieDetails(@Path("movie_id") id: Int): Call<MovieDetail>
 
+    @GET("3/search/movie")
+    fun getSearchMovieList(
+        @Query("query") queryString: String,
+        @Query("api_key") apiKey: String = API_KEY
+    ): Call<Movie>
 }

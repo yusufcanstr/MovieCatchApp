@@ -1,11 +1,10 @@
 package com.yusufcansenturk.moviecatchapp.di.retrofit
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import com.yusufcansenturk.moviecatchapp.model.Genre
 import com.yusufcansenturk.moviecatchapp.model.Movie
 import com.yusufcansenturk.moviecatchapp.model.MovieDetail
-import com.yusufcansenturk.moviecatchapp.util.UiState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,4 +69,23 @@ class RetrofitRepository @Inject constructor(
         })
     }
 
+    fun getSearchMovieList(queryString: String): LiveData<Movie> {
+        val liveData = MutableLiveData<Movie>()
+
+        retrofitServiceInstance.getSearchMovieList(queryString).enqueue(object : Callback<Movie> {
+            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                if (response.isSuccessful) {
+                    liveData.value = response.body()
+                } else {
+
+                }
+            }
+
+            override fun onFailure(call: Call<Movie>, t: Throwable) {
+                // Handle failure
+            }
+        })
+
+        return liveData
+    }
 }
