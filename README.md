@@ -91,7 +91,10 @@ Uygulama geliştirilirken aşağıdaki teknolojiler ve kütüphaneler kullanılm
             </td>    
             <td>
                 Error Notification
-            </td>       
+            </td>    
+            <td>
+                Search Screen
+            </td>        
         </tr>
         <tr>
             <td>
@@ -99,6 +102,9 @@ Uygulama geliştirilirken aşağıdaki teknolojiler ve kütüphaneler kullanılm
             </td>    
             <td>
                 <img src="https://github.com/yusufcanstr/MovieCatchApp/assets/88708663/62394d80-6f8b-40f5-a883-a549665181d1" alt="Telefon Ekran Görüntüsü">
+            </td>
+            <td>
+                <img src="https://github.com/yusufcanstr/MovieCatchApp/assets/88708663/489378e9-f3dc-48ab-b0ae-a74f96a0aedb" alt="Telefon Ekran Görüntüsü">
             </td>
         </tr>
 </table>     
