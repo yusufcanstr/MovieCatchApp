@@ -2,11 +2,14 @@ package com.yusufcansenturk.moviecatchapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yusufcansenturk.moviecatchapp.model.Result
 import com.yusufcansenturk.moviecatchapp.databinding.RecentMovieItemBinding
 import com.yusufcansenturk.moviecatchapp.di.dao.genre.GenreData
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.SearchFragmentDirections
+import com.yusufcansenturk.moviecatchapp.ui.fragments.home.pages.FavoriteFragmentDirections
 import com.yusufcansenturk.moviecatchapp.util.Constants.BASE_IMAGE_URL
 import java.util.*
 
@@ -55,7 +58,10 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
         holder.bind(movieList[position], genreList)
         holder.binding.apply {
-
+            recentMovieItem.setOnClickListener {
+                val action = SearchFragmentDirections.actionSearchFragmentToFilmDetailsFragment(movieList[position].id)
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
 }
